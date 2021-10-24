@@ -5,7 +5,7 @@
 locals {
   # bitcoin-core
   bitcoin_def = templatefile("${path.module}/templates/container-definition-bitcoin.json", {
-    CONTAINER_NAME = local.bitcoin_task_name
+    CONTAINER_NAME = local.bitcoin_service_name
     ESSENTIAL      = var.bitcoin_is_essential
     IMAGE_URL      = var.bitcoin_image_registry_url
     IMAGE_VERSION  = var.bitcoin_image_version
