@@ -15,7 +15,6 @@ locals {
     CLUSTER_NAME   = local.cluster_name
     AWS_REGION     = var.aws_region
     VOLUME_NAME    = var.chain_ebs_volume_name
-    DATA_PATH      = var.chain_data_path
     RPC_AUTH       = var.bitcoin_rpc_auth
     ENV_VARS = jsonencode(concat(
       [{ name = "BITCOIN_DATA", value = "${var.chain_data_path}" }]

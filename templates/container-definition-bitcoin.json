@@ -7,7 +7,7 @@
   "mountPoints": [
     {
       "sourceVolume": "${VOLUME_NAME}",
-      "containerPath": "${DATA_PATH}",
+      "containerPath": "/home/bitcoin/.bitcoin",
       "readOnly": false
     }
   ],
