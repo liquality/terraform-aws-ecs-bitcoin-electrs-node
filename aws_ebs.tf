@@ -12,10 +12,10 @@ resource "aws_volume_attachment" "chain" {
 }
 
 # electrs indexer
-# resource "aws_volume_attachment" "electrs" {
-#   device_name = var.electrs_ebs_volume_device_name
-#   volume_id   = var.electrs_ebs_volume_id
-#   instance_id = aws_instance.main.id
-#
-#   skip_destroy = true
-# }
+resource "aws_volume_attachment" "electrs" {
+  device_name = var.electrs_ebs_volume_device_name
+  volume_id   = var.electrs_ebs_volume_id
+  instance_id = aws_instance.main.id
+
+  skip_destroy = true
+}

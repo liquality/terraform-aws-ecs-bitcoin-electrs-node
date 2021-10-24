@@ -1,0 +1,35 @@
+{
+  "name": "${CONTAINER_NAME}",
+  "image": "${IMAGE_URL}:${IMAGE_VERSION}",
+  "memory": ${MEMORY},
+  "cpu": ${CPU},
+  "essential": ${ESSENTIAL},
+  "mountPoints": [
+    {
+      "sourceVolume": "${VOLUME_NAME}",
+      "containerPath": "${DATA_PATH}",
+      "readOnly": false
+    }
+  ],
+  "portMappings": [
+   {
+     "hostPort": ${CONTAINER_PORT},
+     "containerPort": 19001
+   }
+  ],
+  "environment": ${ENV_VARS},
+  "command": [
+    "-testnet=1",
+    "-server=1",
+    "-printtoconsole",
+    "-rpcauth=${RPC_AUTH}
+  ],
+  "logConfiguration": {
+    "logDriver": "awslogs",
+    "options": {
+      "awslogs-group": "/ecs/${CLUSTER_NAME}",
+      "awslogs-region": "${AWS_REGION}",
+      "awslogs-stream-prefix": "ecs"
+    }
+  }
+}

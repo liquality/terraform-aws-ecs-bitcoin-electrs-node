@@ -2,7 +2,7 @@
 # EBS Volumes
 # ------------------------------------------------------------------------------
 
-# ---------------------------------------------------------------- bitcoin chain
+# bitcoin chain
 variable "chain_ebs_volume_id" {
   type        = string
   description = "The volume ID."
@@ -19,7 +19,7 @@ variable "chain_ebs_volume_device_name" {
   default     = "/dev/sdn"
 }
 
-# -------------------------------------------------------------- electrs indexer
+# electrs indexer
 # variable "electrs_ebs_volume_id" {
 #   type        = string
 #   description = "The volume ID."
