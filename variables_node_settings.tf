@@ -17,3 +17,9 @@ variable "chain_data_path" {
 #   description = "The data path where the electrs indexer will be mounted (on the host)."
 #   default     = "/home/ec2-user/data-electrs-indexer"
 # }
+
+variable "bitcoin_rpc_auth" {
+  type        = string
+  description = "The rpc auth string for bitcoin-core."
+  default     = ""
+}

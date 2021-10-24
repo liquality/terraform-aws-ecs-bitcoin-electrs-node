@@ -5,6 +5,24 @@ set -x
 echo
 
 # ------------------------------------------------------------------------------
+# Configure ECS agent
+# ------------------------------------------------------------------------------
+echo "Configuring ECS agent for cluster \"${CLUSTER_NAME}\"" >> init-ec2-log.txt
+
+# Add cluster name to ECS config
+echo ECS_CLUSTER=${CLUSTER_NAME} >> /etc/ecs/ecs.config
+cat /etc/ecs/ecs.config | grep "ECS_CLUSTER"
+
+sed -i '/After=cloud-final.service/d' /usr/lib/systemd/system/ecs.service
+systemctl daemon-reload
+
+# Verify that the ECS cluster agent is running
+until curl -s http://localhost:51678/v1/metadata
+do
+	sleep 1s
+done
+
+# ------------------------------------------------------------------------------
 # Mount bitcoin chain data volume
 # ------------------------------------------------------------------------------
 sleep 5s
@@ -54,3 +72,6 @@ docker plugin install rexray/ebs REXRAY_PREEMPT=true EBS_REGION=${REGION} --gran
 # ------------------------------------------------------------------------------
 # Start container
 # ------------------------------------------------------------------------------
+echo "Starting container" >> init-ec2-log.txt
+systemctl restart docker
+systemctl restart ecs
