@@ -29,7 +29,7 @@ resource "aws_ecs_task_definition" "bitcoin" {
   family = local.bitcoin_service_name
 
   requires_compatibilities = ["EC2"]
-  network_mode             = "awsvpc"
+  network_mode             = "bridge"
   execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
 
   memory = var.bitcoin_container_memory_alloc
