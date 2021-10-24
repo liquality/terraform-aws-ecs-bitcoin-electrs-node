@@ -18,12 +18,14 @@ resource "aws_instance" "main" {
   iam_instance_profile = aws_iam_instance_profile.default.id
 
   user_data = templatefile("${path.module}/templates/init-ec2.sh", {
+    CLUSTER_NAME      = local.cluster_name
     REGION            = var.aws_region
     CHAIN_DEVICE_NAME = "${var.chain_ebs_volume_device_name}"
     CHAIN_MOUNT_POINT = "${var.chain_data_path}"
   })
 
   # user_data = templatefile("${path.module}/templates/init-ec2.sh", {
+  #   CLUSTER_NAME        = local.cluster_name
   #   REGION              = var.aws_region
   #   CHAIN_DEVICE_NAME   = "${var.chain_ebs_volume_device_name}"
   #   ELECTRS_DEVICE_NAME = "${var.electrs_ebs_volume_device_name}"
