@@ -22,7 +22,7 @@
     "-testnet=1",
     "-server=1",
     "-printtoconsole",
-    "-rpcauth=${RPC_AUTH}
+    "-rpcauth=${RPC_AUTH}"
   ],
   "logConfiguration": {
     "logDriver": "awslogs",
