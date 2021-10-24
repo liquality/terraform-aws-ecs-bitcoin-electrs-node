@@ -9,7 +9,7 @@ resource "aws_instance" "main" {
 
   vpc_security_group_ids = [
     data.terraform_remote_state.vpc.outputs.sg_ssh_id,       # SSH access
-    data.terraform_remote_state.vpc.outputs.sg_btc_19001_id, # bitcoin rpc 19001
+    data.terraform_remote_state.vpc.outputs.sg_btc_19001_id, # bitcoin rpc
     data.terraform_remote_state.vpc.outputs.sg_http_3000_id, # electrs rpc
     data.terraform_remote_state.vpc.outputs.sg_http_9090_id  # electrs batch api
   ]
@@ -17,20 +17,13 @@ resource "aws_instance" "main" {
   iam_instance_profile = aws_iam_instance_profile.default.id
 
   user_data = templatefile("${path.module}/templates/init-ec2.sh", {
-    CLUSTER_NAME      = local.cluster_name
-    REGION            = var.aws_region
-    CHAIN_DEVICE_NAME = "${var.chain_ebs_volume_device_name}"
-    CHAIN_MOUNT_POINT = "${var.chain_data_path}"
+    CLUSTER_NAME        = local.cluster_name
+    REGION              = var.aws_region
+    CHAIN_DEVICE_NAME   = "${var.bitcoin_ebs_volume_device_name}"
+    ELECTRS_DEVICE_NAME = "${var.electrs_ebs_volume_device_name}"
+    CHAIN_MOUNT_POINT   = "${var.bitcoin_data_path}"
+    ELECTRS_MOUNT_POINT = "${var.electrs_data_path}"
   })
-
-  # user_data = templatefile("${path.module}/templates/init-ec2.sh", {
-  #   CLUSTER_NAME        = local.cluster_name
-  #   REGION              = var.aws_region
-  #   CHAIN_DEVICE_NAME   = "${var.chain_ebs_volume_device_name}"
-  #   ELECTRS_DEVICE_NAME = "${var.electrs_ebs_volume_device_name}"
-  #   CHAIN_MOUNT_POINT   = "${var.chain_data_path}"
-  #   ELECTRS_MOUNT_POINT = "${var.electrs_data_path}"
-  # })
 
   key_name = var.ec2_ssh_key_pair_name
 
