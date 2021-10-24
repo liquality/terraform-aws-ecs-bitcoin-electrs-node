@@ -14,7 +14,7 @@
   "portMappings": [
    {
      "hostPort": ${CONTAINER_PORT},
-     "containerPort": 19001
+     "containerPort": ${CONTAINER_PORT}
    }
   ],
   "environment": ${ENV_VARS},

@@ -13,8 +13,7 @@ resource "aws_ecs_service" "bitcoin" {
     subnets = [data.terraform_remote_state.vpc.outputs.private_subnets[0]] # us-east-1a (NAT Gateway is here)
     security_groups = [
       data.terraform_remote_state.vpc.outputs.sg_http_80_id,  # port 80
-      data.terraform_remote_state.vpc.outputs.sg_btc_8332_id, # BTC rpc (mainnet)
-      data.terraform_remote_state.vpc.outputs.sg_btc_18332_id # BTC rpc (testnet)
+      data.terraform_remote_state.vpc.outputs.sg_btc_19001_id # bitcoin rpc 19001
     ]
     assign_public_ip = false
   }
@@ -29,7 +28,7 @@ resource "aws_ecs_task_definition" "bitcoin" {
   family = local.bitcoin_service_name
 
   requires_compatibilities = ["EC2"]
-  network_mode             = "bridge"
+  network_mode             = "awsvpc"
   execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
 
   memory = var.bitcoin_container_memory_alloc

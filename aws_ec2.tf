@@ -9,8 +9,7 @@ resource "aws_instance" "main" {
 
   vpc_security_group_ids = [
     data.terraform_remote_state.vpc.outputs.sg_ssh_id,       # SSH access
-    data.terraform_remote_state.vpc.outputs.sg_btc_8332_id,  # BTC rpc (mainnet)
-    data.terraform_remote_state.vpc.outputs.sg_btc_18332_id, # BTC rpc (testnet)
+    data.terraform_remote_state.vpc.outputs.sg_btc_19001_id, # bitcoin rpc 19001
     data.terraform_remote_state.vpc.outputs.sg_http_3000_id, # electrs rpc
     data.terraform_remote_state.vpc.outputs.sg_http_9090_id  # electrs batch api
   ]

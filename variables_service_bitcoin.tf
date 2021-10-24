@@ -31,7 +31,7 @@ variable "bitcoin_image_version" {
 variable "bitcoin_container_port" {
   type        = number
   description = "The port for the bitcoin json-rpc api"
-  default     = 18332
+  default     = 19001
 }
 
 variable "bitcoin_container_memory_alloc" {
