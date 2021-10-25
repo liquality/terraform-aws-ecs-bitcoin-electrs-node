@@ -16,21 +16,14 @@ resource "aws_instance" "main" {
 
   iam_instance_profile = aws_iam_instance_profile.default.id
 
-  user_data = templatefile("${path.module}/templates/init-ec2-btc-only.sh", {
+  user_data = templatefile("${path.module}/templates/init-ec2.sh", {
     CLUSTER_NAME        = local.cluster_name
     REGION              = var.aws_region
     CHAIN_DEVICE_NAME   = "${var.bitcoin_ebs_volume_device_name}"
+    ELECTRS_DEVICE_NAME = "${var.electrs_ebs_volume_device_name}"
     CHAIN_MOUNT_POINT   = "${var.bitcoin_data_path}"
+    ELECTRS_MOUNT_POINT = "${var.electrs_data_path}"
   })
-
-  # user_data = templatefile("${path.module}/templates/init-ec2.sh", {
-  #   CLUSTER_NAME        = local.cluster_name
-  #   REGION              = var.aws_region
-  #   CHAIN_DEVICE_NAME   = "${var.bitcoin_ebs_volume_device_name}"
-  #   ELECTRS_DEVICE_NAME = "${var.electrs_ebs_volume_device_name}"
-  #   CHAIN_MOUNT_POINT   = "${var.bitcoin_data_path}"
-  #   ELECTRS_MOUNT_POINT = "${var.electrs_data_path}"
-  # })
 
   key_name = var.ec2_ssh_key_pair_name
 
