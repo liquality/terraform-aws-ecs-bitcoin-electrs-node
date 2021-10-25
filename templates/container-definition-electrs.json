@@ -1,0 +1,56 @@
+{
+  "name": "${CONTAINER_NAME}",
+  "image": "${IMAGE_URL}:${IMAGE_VERSION}",
+  "memory": ${MEMORY},
+  "cpu": ${CPU},
+  "essential": ${ESSENTIAL},
+  "mountPoints": [
+    {
+      "sourceVolume": "${BITCOIN_VOLUME_NAME}",
+      "containerPath": "/data-bitcoin-chain",
+      "readOnly": true
+    },
+    {
+      "sourceVolume": "${ELECTRS_VOLUME_NAME}",
+      "containerPath": "/data-electrs-indexer",
+      "readOnly": false
+    }
+  ],
+  "portMappings": [
+   {
+     "hostPort": ${CONTAINER_PORT},
+     "containerPort": ${CONTAINER_PORT}
+   }
+  ],
+  "environment": ${ENV_VARS},
+  "command": [
+    "-vvv",
+    "--timestamp",
+    "--network",
+    "testnet",
+    "--daemon-rpc-addr",
+    "0.0.0.0:19001",
+    "--daemon-dir",
+    "/data-bitcoin-chain",
+    "--http-addr",
+    "127.0.0.1:3000",
+    "--db-dir",
+    "/data-electrs-indexer",
+    "--electrum-rpc-addr",
+    "127.0.0.1:50001",
+    "--electrum-txs-limit",
+    "500",
+    "--utxos-limit",
+    "500",
+    "--index-unspendables",
+    "--address-search"
+  ],
+  "logConfiguration": {
+    "logDriver": "awslogs",
+    "options": {
+      "awslogs-group": "/ecs/${CLUSTER_NAME}",
+      "awslogs-region": "${AWS_REGION}",
+      "awslogs-stream-prefix": "ecs"
+    }
+  }
+}
