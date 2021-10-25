@@ -5,7 +5,7 @@
 locals {
   # bitcoin
   bitcoin_def = templatefile("${path.module}/templates/container-definition-bitcoin.json", {
-    CONTAINER_NAME = local.bitcoin_service_name
+    CONTAINER_NAME = var.bitcoin_task_name
     ESSENTIAL      = var.bitcoin_is_essential
     IMAGE_URL      = var.bitcoin_image_registry_url
     IMAGE_VERSION  = var.bitcoin_image_version
@@ -23,7 +23,7 @@ locals {
 
   # electrs
   # electrs_def = templatefile("${path.module}/templates/container-definition-electrs.json", {
-  #   CONTAINER_NAME      = local.electrs_service_name
+  #   CONTAINER_NAME      = var.electrs_task_name
   #   ESSENTIAL           = var.electrs_is_essential
   #   IMAGE_URL           = var.electrs_image_registry_url
   #   IMAGE_VERSION       = var.electrs_image_version
