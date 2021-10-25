@@ -11,11 +11,11 @@ resource "aws_volume_attachment" "bitcoin" {
   skip_destroy = true
 }
 
-# electrs
-resource "aws_volume_attachment" "electrs" {
-  device_name = var.electrs_ebs_volume_device_name
-  volume_id   = var.electrs_ebs_volume_id
-  instance_id = aws_instance.main.id
-
-  skip_destroy = true
-}
+# # electrs
+# resource "aws_volume_attachment" "electrs" {
+#   device_name = var.electrs_ebs_volume_device_name
+#   volume_id   = var.electrs_ebs_volume_id
+#   instance_id = aws_instance.main.id
+#
+#   skip_destroy = true
+# }
