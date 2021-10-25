@@ -7,12 +7,12 @@
   "mountPoints": [
     {
       "sourceVolume": "${BITCOIN_VOLUME_NAME}",
-      "containerPath": "/home/ec2-user/data-bitcoin-chain",
+      "containerPath": "/data-bitcoin-chain",
       "readOnly": true
     },
     {
       "sourceVolume": "${ELECTRS_VOLUME_NAME}",
-      "containerPath": "/home/ec2-user/data-electrs-indexer",
+      "containerPath": "/data-electrs-indexer",
       "readOnly": false
     }
   ],
@@ -28,12 +28,14 @@
     "--timestamp",
     "--network",
     "testnet",
+    "--daemon-rpc-addr",
+    "0.0.0.0:19001",
+    "--daemon-dir",
+    "/data-bitcoin-chain",
     "--http-addr",
     "127.0.0.1:3000",
-    "--daemon-dir",
-    "/home/ec2-user/data-bitcoin-chain",
     "--db-dir",
-    "/home/ec2-user/data-electrs-indexer",
+    "/data-electrs-indexer",
     "--electrum-rpc-addr",
     "127.0.0.1:50001",
     "--electrum-txs-limit",
