@@ -19,9 +19,11 @@
   ],
   "environment": ${ENV_VARS},
   "command": [
+    "-printtoconsole",
     "-testnet=1",
     "-server=1",
-    "-printtoconsole",
+    "-rpcallowip=10.0.1.0/24",
+    "-rpcport=19001",
     "-rpcauth='${RPC_AUTH}'"
   ],
   "logConfiguration": {
