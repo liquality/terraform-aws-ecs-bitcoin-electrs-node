@@ -15,11 +15,7 @@ locals {
     CLUSTER_NAME   = local.cluster_name
     AWS_REGION     = var.aws_region
     VOLUME_NAME    = var.bitcoin_ebs_volume_name
-    COMMANDS       = concat(
-      ["-printtoconsole", "-testnet=1", "-server=1"],
-      ["-rpcallowip=0.0.0.0/0", "-rpcbind=0.0.0.0"],
-      ["-rpcauth=${var.bitcoin_rpc_auth}"]
-    )
+    RPC_AUTH       = var.bitcoin_rpc_auth
     ENV_VARS = jsonencode(concat(
       []
     ))

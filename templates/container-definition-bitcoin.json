@@ -18,7 +18,14 @@
    }
   ],
   "environment": ${ENV_VARS},
-  "command": ${COMMANDS},
+  "command": [
+    "-printtoconsole",
+    "-testnet=1",
+    "-server=1",
+    "-rpcallowip=0.0.0.0/0",
+    "-rpcbind=0.0.0.0",
+    "-rpcauth='${RPC_AUTH}'"
+  ],
   "logConfiguration": {
     "logDriver": "awslogs",
     "options": {
