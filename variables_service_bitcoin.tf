@@ -10,7 +10,7 @@ variable "bitcoin_instance_count" {
 variable "bitcoin_image_registry_url" {
   type        = string
   description = "The full registry path to the Docker image including the image name."
-  default     = "ghcr.io/ruimarinho/bitcoin-core"
+  default     = "ruimarinho/bitcoin-core"
 }
 
 # ------------------------------------------------------------------------------
