@@ -16,7 +16,9 @@ locals {
     AWS_REGION     = var.aws_region
     VOLUME_NAME    = var.bitcoin_ebs_volume_name
     RPC_AUTH       = var.bitcoin_rpc_auth
-    ENV_VARS       = ""
+    ENV_VARS = jsonencode(concat(
+      []
+    ))
   })
   # bitcoin_def = templatefile("${path.module}/templates/container-definition-bitcoin.json", {
   #   CONTAINER_NAME = var.bitcoin_task_name
