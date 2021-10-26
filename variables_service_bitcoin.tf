@@ -10,7 +10,7 @@ variable "bitcoin_instance_count" {
 variable "bitcoin_image_registry_url" {
   type        = string
   description = "The full registry path to the Docker image including the image name."
-  default     = "ghcr.io/vulpemventures/bitcoin"
+  default     = "ghcr.io/ruimarinho/bitcoin-core"
 }
 
 # ------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ variable "bitcoin_image_registry_url" {
 # ------------------------------------------------------------------------------
 variable "bitcoin_task_name" {
   type        = string
-  description = "The name to attach to the running container."
+  description = "The name to attach to the running container (the chain_network_name will be post-pended)."
   default     = "bitcoin"
 }
 
@@ -31,7 +31,7 @@ variable "bitcoin_image_version" {
 variable "bitcoin_container_port" {
   type        = number
   description = "The port for the bitcoin json-rpc api"
-  default     = 19001
+  default     = 8332
 }
 
 variable "bitcoin_container_memory_alloc" {

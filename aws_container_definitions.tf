@@ -5,7 +5,7 @@
 locals {
   # bitcoin
   bitcoin_def = templatefile("${path.module}/templates/container-definition-bitcoin.json", {
-    CONTAINER_NAME = var.bitcoin_task_name
+    CONTAINER_NAME = local.bitcoin_service_name
     ESSENTIAL      = var.bitcoin_is_essential
     IMAGE_URL      = var.bitcoin_image_registry_url
     IMAGE_VERSION  = var.bitcoin_image_version
@@ -15,13 +15,14 @@ locals {
     CLUSTER_NAME   = local.cluster_name
     AWS_REGION     = var.aws_region
     VOLUME_NAME    = var.bitcoin_ebs_volume_name
-    RPC_AUTH       = var.bitcoin_rpc_auth
+    COMMANDS       = ["-printtoconsole", "-testnet=1", "-server=1", "-rpcallowip=0.0.0.0/0", "-rpcbind=0.0.0.0", "-rpcauth='${var.bitcoin_rpc_auth}'"]
     ENV_VARS = jsonencode(concat(
       []
     ))
   })
+
   # bitcoin_def = templatefile("${path.module}/templates/container-definition-bitcoin.json", {
-  #   CONTAINER_NAME = var.bitcoin_task_name
+  #   CONTAINER_NAME = local.bitcoin_service_name
   #   ESSENTIAL      = var.bitcoin_is_essential
   #   IMAGE_URL      = var.bitcoin_image_registry_url
   #   IMAGE_VERSION  = var.bitcoin_image_version
@@ -39,7 +40,7 @@ locals {
 
   # electrs
   # electrs_def = templatefile("${path.module}/templates/container-definition-electrs.json", {
-  #   CONTAINER_NAME      = var.electrs_task_name
+  #   CONTAINER_NAME      = local.electrs_service_name
   #   ESSENTIAL           = var.electrs_is_essential
   #   IMAGE_URL           = var.electrs_image_registry_url
   #   IMAGE_VERSION       = var.electrs_image_version
