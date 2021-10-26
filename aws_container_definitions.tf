@@ -18,7 +18,7 @@ locals {
     COMMANDS       = concat(
       ["-printtoconsole", "-testnet=1", "-server=1"],
       ["-rpcallowip=0.0.0.0/0", "-rpcbind=0.0.0.0"],
-      ["-rpcauth='${var.bitcoin_rpc_auth}'"]
+      ["-rpcauth=${var.bitcoin_rpc_auth}"]
     )
     ENV_VARS = jsonencode(concat(
       []
